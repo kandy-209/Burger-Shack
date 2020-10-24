@@ -1,8 +1,8 @@
 const express = require("express");
-const router = express.Router();
-const burger = require("../models/burger");
+var router = express.Router();
+const burger = require("../models/burger.js");
 
-router.get("/", (req, res) => {
+router.get("/", function(req, res) {
     burger.select(function(data) {
         var object = {
             order: data
@@ -11,26 +11,25 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/api/order", (req, res) => {
-    burger.create(["burger_name"], [req.body.name], function(result) {
-        res.json({ id: result.insertId });
+router.post("/api/burger", function(req, res) {
+    name = req.body.name;
+    burger.insert(name, function(result) {
+        console.log(result);
     });
+    res.render("index");
 });
 
-router.put("/api/order/:id", function(req, res) {
-    var condition = "id = " + req.params.id;
+router.put("/api/burgers/:id", function(req, res) {
+    // var condition = "id = " + req.params.id;
+    var id = req.params.id;
 
-    burger.update({
-            devoured: req.body.devoured,
-        }, condition,
-        function(result) {
-            if (result.changedRows == 0) {
-                return res.status(4040).end();
-            } else {
-                res.status(200).end();
-            }
+    burger.update(id, function(result) {
+        if (result.changedRows == 0) {
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
         }
-    );
+    });
 });
 
 router.delete("/api/order/:id", function(req, res) {

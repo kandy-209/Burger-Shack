@@ -3,36 +3,38 @@
 <h2>EAT ME</h2>
 
 <ul>
-  {{#each burgers}}
+    {{#each order}}
     {{#unless devoured}}
-      {{> burgers/burgers-block devoured=false}}
+    {{this.burger_name}}
+    <button data-id="{{this.id}}">Eat</button>
     {{/unless}}
-  {{/each}}
+    {{/each}}
 </ul>
 
 <h2>YUMMY IN MY TUMMY</h2>
 
 <ul>
-  {{#each burgers}}
+    {{#each order}}
     {{#if devoured}}
-      {{> burgers/bergers-block devoured=true}}
+    {{this.burger_name}}
+    <button id="eat" data-newId="{{this.id}}">Eat</button>
     {{/if}}
-  {{/each}}
+    {{/each}}
 </ul>
 
 <h2>Add a Burger</h2>
 <form class="create-form">
 
-  <div class="form-group">
-    <label for="br">Burger Name:</label>
-    <input type="text" id="br" name="name">
-  </div>
+    <div class="form-group">
+        <label for="br">Burger Name:</label>
+        <input type="text" id="br" name="name">
+    </div>
 
-  <div class="form-group">
-    <label for="devoured">devoured?</label><br>
-    <input type="radio" name="devoured" value="1" checked> devoured!<br>
-    <input type="radio" name="devoured" value="0"> YUMMY
-  </div>
+    <div class="form-group">
+        <label for="devoured">devoured?</label><br>
+        <input type="radio" name="devoured" value="1" checked> devoured!<br>
+        <input type="radio" name="devoured" value="0"> YUMMY
+    </div>
 
-  <button type="submit">Add a Burger</button>
+    <button id ="add" type="submit">Add a Burger</button>
 </form>
