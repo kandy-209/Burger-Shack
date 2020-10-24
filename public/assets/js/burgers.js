@@ -3,15 +3,15 @@ $(function() {
     $(".change-devour").on("click", function(event) {
         event.preventDefault();
         var id = $(this).data("id");
-        // var newDevour = $(this).data("newDevour");
+        var newDevour = $(this).data("newDevour");
 
-        // var newBurgerState = {
-        //     devoured: true
-        // };
+        var newBurgerState = {
+            devoured: true
+        };
 
         $.ajax("/api/burgers/" + id, {
-            type: "PUT"
-                // data: newBurgerState
+            type: "PUT",
+            data: newBurgerState
         }).then(
             function() {
                 console.log("changed devour to", true);
@@ -25,8 +25,8 @@ $(function() {
         console.log("working");
 
         var newBurger = {
-            name: $("#br").val().trim()
-                // devoured: 0
+            name: $("#br").val().trim(),
+            devoured: 0
         };
 
         $.ajax("/api/burger", {
@@ -41,3 +41,5 @@ $(function() {
     });
 
 });
+
+// I dont know whats going wrong with my code but i need to figure out why its taking the submit button but not adding or deleting
