@@ -3,7 +3,7 @@ const router = express.Router();
 const burger = require("../models/burger");
 
 router.get("/", (req, res) => {
-    burger.all(function(data) {
+    burger.select(function(data) {
         var object = {
             order: data
         };
@@ -17,7 +17,7 @@ router.post("/api/order", (req, res) => {
     });
 });
 
-router.put("/api/order/:id", (req, res) => {
+router.put("/api/order/:id", function(req, res) {
     var condition = "id = " + req.params.id;
 
     burger.update({
@@ -33,7 +33,7 @@ router.put("/api/order/:id", (req, res) => {
     );
 });
 
-router.delete("/api/order/:id", (req, res) => {
+router.delete("/api/order/:id", function(req, res) {
     var condition = "id = " + req.params.id;
 
     burger.delete(condition, function(result) {
